@@ -17,6 +17,10 @@ const cambioBackground = computed(() => {
 onMounted(() => {
   store.fetchCategorias()
 })
+
+const handleSubmit = () => {
+  store.obtenerRecetas()
+}
 </script>
 
 <template>
@@ -33,13 +37,13 @@ onMounted(() => {
           <RouterLink
             :to="{ name: 'inicio' }"
             class="text-white uppercase font-bold"
-            active-class="text-orange-500"
+            active-class="text-red-500"
             >Inicio</RouterLink
           >
           <RouterLink
             :to="{ name: 'favoritos' }"
             class="text-white uppercase font-bold"
-            active-class="text-orange-500"
+            active-class="text-blue-500"
             >Favoritos</RouterLink
           >
         </nav>
@@ -49,6 +53,7 @@ onMounted(() => {
         action=""
         class="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-6"
         v-if="formulario"
+        @submit.prevent="handleSubmit"
       >
         <div class="space-y- 4">
           <label for="ingrediente" class="block text-white uppercase font-extrabold text-log">
