@@ -1,4 +1,5 @@
 <script setup>
+import InicioView from '../views/InicioView.vue'
 import { computed, onMounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useBebidasStore } from '../stores/bebidas'

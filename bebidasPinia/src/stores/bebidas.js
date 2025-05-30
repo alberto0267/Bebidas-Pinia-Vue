@@ -123,11 +123,6 @@ else {
 
 }
 function obtenerRecetas() {
-// const busqueda2=busqueda;
-//   console.log('buscando API')
-//   console.log(busqueda)
-// return busqueda;
-
 return fetchBusqueda();
 
 }
