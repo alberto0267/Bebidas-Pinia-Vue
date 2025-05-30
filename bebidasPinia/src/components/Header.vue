@@ -5,6 +5,8 @@ import { RouterLink, useRoute } from 'vue-router'
 import { useBebidasStore } from '../stores/bebidas'
 const route = useRoute()
 const store = useBebidasStore()
+//Lo siguiente imprime todo que que hay en bebidas,js asi saber qu estamos llamando lo correcto
+console.log('object keys', Object.keys(store))
 console.log(store)
 
 const formulario = computed(() => {

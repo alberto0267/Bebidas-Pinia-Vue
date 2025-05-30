@@ -82,6 +82,13 @@ recetasCategorias.value = dataCategoria.drinks;
 
 console.log('Recetas por nombre:', recetasNombre.value);
 console.log('Recetas por categoría:', recetasCategorias.value);
+
+const recetasFiltradas = recetasNombre.value.filter(nombre =>
+  recetasCategorias.value.some(cat => cat.idDrink === nombre.idDrink)
+)
+
+recetas.value = recetasFiltradas
+
 })
 
 .catch(error => {

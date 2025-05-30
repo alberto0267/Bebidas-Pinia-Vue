@@ -1,16 +1,14 @@
 <script setup>
-defineProps({
+const props = defineProps({
   receta: {
     type: Object,
+    required: true,
   },
 })
 </script>
 
 <template>
-  <div>
-    <h2>{{ receta.strDrink }}</h2>
+  <div class="bg-white rounded shadow p-4">
+    <h2 class="text-lg font-bold text-black">{{ receta.strDrink }}</h2>
   </div>
 </template>
-
-<style scoped>
-</style>
