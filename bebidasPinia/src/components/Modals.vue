@@ -6,10 +6,11 @@ import { computed, ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { useModalStore } from '../stores/modal'
 import { useBebidasStore } from '../stores/bebidas'
+import { useFavoritosStore } from '../stores/favoritos'
 import Receta from '../components/Receta.vue'
 const bebidas = useBebidasStore()
 const modal = useModalStore()
-
+const favoritos = useFavoritosStore()
 const agregarIngredientes = computed(() => {
   const ingredientes = []
 
@@ -115,6 +116,7 @@ const instrucciones = computed(() => {
                   Cerrar
                 </button>
                 <button
+                  @click="favoritos.handleClickFavoritos()"
                   class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-red-600 transition"
                 >
                   Agregar a Favoritos
