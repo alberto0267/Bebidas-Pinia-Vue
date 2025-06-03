@@ -1,10 +1,14 @@
 import { defineStore } from "pinia";
 import { ref , reactive} from "vue";
+import { useModalStore } from './modal'
 export const useBebidasStore = defineStore('bebidas' , () =>{
     const listaCategorias = ref([]);
     const recetasNombre = ref([]);
     const recetasCategorias=ref([]);
     const recetas = ref([]);
+    const recetasId=ref([]);
+    const modal = useModalStore();
+    const receta=ref([])
 
 const busqueda = ref({
     nombre:'',
@@ -137,7 +141,38 @@ return fetchBusqueda();
 
 
 
-// const categorias =  ref([]);
+function verReceta(id){
+console.log('Entrando a ver recetas con id', id)
+
+// const {ids} = busqueda.value
+
+const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+console.log('link ', endpoint);
+
+    fetch(endpoint, {
+        // method: 'GET',
+      
+      })
+        .then(async (response) => {
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Mensaje de error:', errorData);
+            console.error('Errores de peticion')
+            throw new Error('Algo falla')     
+          }
+          return response.json()
+        })
+        .then((data) => {
+            recetasId.value = data.drinks;
+            receta.value = data.drinks[0];
+          console.log('Mensaje del servidor ', data)
+        })
+        .catch((error) => {
+          console.error('error: ', error)
+        })
+        modal.handleClickModal();
+        
+}
 
 return {
 
@@ -148,7 +183,10 @@ return {
     recetas,
     fetchBusqueda,
     recetasCategorias,
-    recetasNombre
+    recetasNombre,
+    verReceta,
+    recetasId,
+    receta
 }
 
 })
