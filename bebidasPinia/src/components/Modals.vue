@@ -1,9 +1,10 @@
 
 <script setup>
+import { Dialog, DialogPanel, TransitionRoot, TransitionChild } from '@headlessui/vue'
+
 import { Martini } from 'lucide-vue-next'
 
 import { computed, ref } from 'vue'
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { useModalStore } from '../stores/modal'
 import { useBebidasStore } from '../stores/bebidas'
 import { useFavoritosStore } from '../stores/favoritos'
@@ -115,12 +116,22 @@ const instrucciones = computed(() => {
                 >
                   Cerrar
                 </button>
-                <button
-                  @click="favoritos.handleClickFavoritos()"
-                  class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-red-600 transition"
-                >
-                  Agregar a Favoritos
-                </button>
+                <div>
+                  <button
+                    @click="favoritos.handleClickFavoritos()"
+                    class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-red-600 transition"
+                    v-if="favoritos.favDuplicados(bebidas.receta.idDrink)"
+                  >
+                    Eliminar
+                  </button>
+                  <button
+                    v-else
+                    @click="favoritos.handleClickFavoritos()"
+                    class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-red-600 transition"
+                  >
+                    Agregar a Favoritos
+                  </button>
+                </div>
               </div>
             </DialogPanel>
           </TransitionChild>
