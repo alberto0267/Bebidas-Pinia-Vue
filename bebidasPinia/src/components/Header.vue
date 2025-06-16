@@ -1,8 +1,11 @@
 <script setup>
 import InicioView from '../views/InicioView.vue'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useBebidasStore } from '../stores/bebidas'
+import { useNotificacionStore } from '../stores/notificacion'
+const notificacion = useNotificacionStore()
+
 const route = useRoute()
 const store = useBebidasStore()
 //Lo siguiente imprime todo que que hay en bebidas,js asi saber qu estamos llamando lo correcto
@@ -24,6 +27,10 @@ onMounted(() => {
 const handleSubmit = () => {
   store.obtenerRecetas()
 }
+
+// watch(bebida, (nueva, antigua) => {
+//   console.log('¡Cambió la bebida!')
+// })
 </script>
 
 <template>
@@ -49,6 +56,12 @@ const handleSubmit = () => {
             active-class="text-blue-500"
             >Favoritos</RouterLink
           >
+          <RouterLink
+            :to="{ name: 'ai' }"
+            class="text-white uppercase font-bold"
+            active-class="text-blue-500"
+            >Generador con AI
+          </RouterLink>
         </nav>
       </div>
 
